@@ -268,7 +268,7 @@ const resolvers = {
 }
 
 const server = new ApolloServer({typeDefs, resolvers, engine: {
-    reportSchema: true
+    reportSchema: true, playground: true, introspection: true,
 }})
 
 server.listen({port: process.env.PORT || 4000}).then(() =>{
