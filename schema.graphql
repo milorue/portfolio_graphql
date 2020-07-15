@@ -1,0 +1,69 @@
+type Query{
+    milo: Person
+    specificskills(skillType: SkillType): [Skill]
+    skills: [Skill]
+    birthday: Date
+    links: Links
+    education: Education
+}
+
+enum SkillType{
+    WEB
+    MOBILE
+    DATABASE
+    LANGUAGE
+    TOOL
+    SKILL
+}
+
+type Person {
+    firstName: String!
+    lastName: String!
+    birthday: Date
+    age: Int
+    email: String
+}
+
+type Date {
+    day: Int
+    month: Int
+    year: Int
+    dateString: String
+}
+
+type Skill {
+    name: String!
+    type: String
+    yearsofexperience: Int
+    tags: [String]
+    projects: [Project]
+    note: String
+    color: String
+}
+
+type Links {
+    github: String
+    linkedin: String
+    devpost: String
+    instagram: String
+    twitter: String
+    resume: String
+}
+
+type Project {
+    name: String!
+    languages: [String]
+    link: String
+    repo: String
+}
+
+type Education {
+    collegename: String
+    degree: String
+    major: String
+    minor: String
+    gpa: String
+    awards: [String]
+    city: String
+    state: String
+}

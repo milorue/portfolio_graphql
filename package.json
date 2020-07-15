@@ -1,0 +1,23 @@
+{
+  "name": "portfoliographql",
+  "version": "1.0.0",
+  "description": "GraphQL API for Milo's Portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Milo S. Rue",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.15.1",
+    "dotenv": "^8.2.0",
+    "graphql": "^15.3.0",
+    "graphql-tools": "^6.0.13",
+    "graphql-type-json": "^0.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
