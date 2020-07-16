@@ -5,6 +5,7 @@ type Query{
     birthday: Date
     links: Links
     education: Education
+    jobs: [Job]
 }
 
 enum SkillType{
@@ -14,6 +15,20 @@ enum SkillType{
     LANGUAGE
     TOOL
     SKILL
+}
+
+type Job {
+    title: String
+    company: String
+    location: Location
+    startDate: Date
+    endDate: Date
+    responsibilities: [String]
+}
+
+type Location {
+    city: String
+    state: String
 }
 
 type Person {
@@ -28,7 +43,7 @@ type Date {
     day: Int
     month: Int
     year: Int
-    dateString: String
+    dateString: String!
 }
 
 type Skill {
@@ -52,6 +67,7 @@ type Links {
 
 type Project {
     name: String!
+    description: String
     languages: [String]
     link: String
     repo: String

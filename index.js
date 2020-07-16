@@ -12,10 +12,91 @@ const education = {
     major: "Computer Science",
     minor: "Political Science",
     gpa: "3.5",
-    awards: ["Dean's List Fall 2016, Spring 2017", "Leadership Scholar"],
+    awards: ["Dean's List Fall 2016, Spring 2017", "Leadership Scholar", "Winner of Best Mobile, Logistical, and 2nd place Overall @ HackBU"],
     city: "Ithaca",
     state: "New York"
 }
+
+const jobs = [
+    {
+        name: "Software Engineer I",
+        company: "Prescient Edge",
+        location: {
+            city: "Laurel",
+            state: "Maryland"
+        },
+        startDate: {
+            day: 15,
+            month: 8,
+            year: 2019,
+            dateString: "08/05/2019"
+        },
+        endDate: {
+            day: 0,
+            month: 0,
+            year: 0,
+            dateString: "Current"
+        },
+        responsibilities: [
+            "Building embedded systems for USCG Minotaur in C++, C, and Python",
+            "Designing and developing short term and long term business goals for the project and company",
+            "Developing internal tolling to leverage data from MongoDB towards the bus controller and mission processors in Node.js",
+            "Migrating and converting an existing aircraft bus controller to 64 bit software and new hardware architecture",
+            "Developing web applications in React for internal use and to improve my own and others productivity"
+        ]
+    },
+    {
+        name: "React-Native Mobile Developer",
+        company: "Ithaca College",
+        location: {
+            city: "Ithaca",
+            state: "New York"
+        },
+        startDate: {
+            day: 1,
+            month: 6,
+            year: 2019,
+            dateString: "06/01/2019"
+        },
+        endDate: {
+            day: 1,
+            month: 9,
+            year: 2019,
+            dateString: "09/01/2019"
+        },
+        responsibilities: [
+            "Solo developed a mobility assistance and routing application for people within the Ithaca College community.",
+            "Created a mobile frontend designed to be easier to use for people with motor disabilities based on user testing results.",
+            "Interfaced with geographic data to create reliable systems to route users from place to place. Utilized geographic libraries like react-native-maps, mapbox-gl, and Google & OpenStreetMap API’s.",
+            "Created simple backend and database systems using NodeJS, Express and MongoDB"
+        ]
+    },
+    {
+        name: "Fullstack Mobile & Web Developer",
+        company: "Contract/Freelance",
+        location: {
+            city: "Annapolis",
+            state: "Maryland"
+        },
+        startDate: {
+            day: 12,
+            month: 1,
+            year: 2019,
+            dateString: "01/12/2019"
+        },
+        endDate: {
+            day: 2,
+            month: 5,
+            year: 2020,
+            dateString: "05/02/2020"
+        },
+        responsibilities: [
+            "Built out full-stack capable applications for small businesses in my hometown of Annapolis, MD that are used internally on both mobile and web environments",
+            "Worked with existing databases and backend infrastructure to construct mobile application extensions of existing online and internal tolling presences.",
+            "Helped create and curate a companies leap to a fully online presence, payment system, internal messaging, and other tools which have generated over $100,000 in revenue"
+        ]
+    }
+]
 
 const people = [
     {
@@ -38,8 +119,8 @@ const links = {
         linkedin: "https://www.linkedin.com/in/milorue/",
         devpost: "https://devpost.com/MiloRue?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav",
         instagram: "https://www.instagram.com/milorue/",
-        twitter: "",
-        resume: "https://docdro.id/8QYRGHa",
+        twitter: "https://twitter.com/milo_rue",
+        resume: "https://docdro.id/LePG3ZX",
 }
 
 const skills = [
@@ -263,6 +344,12 @@ const resolvers = {
         },
         education(){
             return education
+        },
+        birthday(){
+            return people[0].birthday
+        },
+        jobs(){
+            return jobs
         }
     }
 }
