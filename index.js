@@ -14,7 +14,7 @@ const projects = [
         links: ["https://cara-api.herokuapp.com/", "https://cara-docs.herokuapp.com/"],
         repos: ["https://github.com/milorue/cara_v2", "https://github.com/milorue/cara_v2"],
         note: "Has gone through multiple revisions and full redesigns, currently working on v3",
-        image: "https://ibb.co/NYHwG56"
+        image: "https://i.ibb.co/NYHwG56/logo.png"
     },
     {
         name: "Portfolio",
@@ -23,7 +23,7 @@ const projects = [
         links: ["milo-rue.com", "milo-rue.herokuapp.com"],
         repos: ["https://github.com/milorue/portfolio", "https://github.com/milorue/portfolio_graphql"],
         note: "I built this updated portfolio as a showcase of my skills as well as a platform for my professional career and to centralize the data about my career into an api to be used in resume generators and other future projects.",
-        image: ""
+        image: "https://oceanwp.org/wp-content/uploads/2017/07/portfolio-image.png"
     },
     {
         name: "PlowIt/PlowMe",
@@ -41,14 +41,16 @@ const projects = [
         links: ["https://github.com/milorue/discord_bot"],
         repos: ["https://github.com/milorue/discord_bot"],
         note: "I also built a version of this bot that checked for hate speech using TensorFlow but it wasn't the greatest at recognizing toxic behavior on the server and became quite a joke among the members",
-        image: "https://ibb.co/3McZZ2B"
+        image: "https://i.ibb.co/jWDXXmg/kronk.jpg"
     },
     {
         name: "Twitch Plays League of Legends",
         description: "A Node.js Server to accept twitch donations and other twitch actions (subscriptions, follows, etc) to trigger abilities and other in-game actions",
         used: ["Node.js", "Express.js", "StreamLabs API", "WebSockets", "StreamLabs WebSocket API", "Robot.js", "RiotGames API", "Javascript"],
         links: ["https://github.com/milorue/twitch_plays_league"],
-        repos: ["https://github.com/milorue/twitch_plays_league"]
+        repos: ["https://github.com/milorue/twitch_plays_league"],
+        note: "This project is actively in development as a fun part of my twitch stream and hopefully more streamers.",
+        image: "https://static-cdn.jtvnw.net/ttv-boxart/Twitch%20Plays.jpg"
     },
     {
         name: "AI plays Pacman",
