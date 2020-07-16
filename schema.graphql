@@ -6,6 +6,8 @@ type Query{
     links: Links
     education: Education
     jobs: [Job]
+    projects: [Project]
+    specificProjects(uses: [String]): [Project]
 }
 
 enum SkillType{
@@ -51,9 +53,7 @@ type Skill {
     type: String
     yearsofexperience: Int
     tags: [String]
-    projects: [Project]
     note: String
-    color: String
 }
 
 type Links {
@@ -68,9 +68,11 @@ type Links {
 type Project {
     name: String!
     description: String
-    languages: [String]
-    link: String
-    repo: String
+    used: [String]
+    links: [String]
+    repos: [String]
+    note: String
+    image: String
 }
 
 type Education {
