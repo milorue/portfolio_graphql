@@ -12,7 +12,7 @@ const projects = [
         description: "A mobile application and platform aimed at providing accessible mapping and related services to college campuses and beyond",
         used: ["React.js", "React Native", "Node.js", "Google Maps API" , "Google Places API", "Open Street Maps API", "MongoDB", "GraphQL", "Apollo", "PostgreSQL", "Expo CLI", "Javascript"],
         links: ["https://cara-api.herokuapp.com/", "https://cara-docs.herokuapp.com/"],
-        repos: ["https://github.com/milorue/cara_v2", "https://github.com/milorue/cara_v2"],
+        repos: ["https://github.com/milorue/cara_v2", "https://github.com/milorue/cara_api"],
         note: "Has gone through multiple revisions and full redesigns, currently working on v3",
         image: "https://i.ibb.co/NYHwG56/logo.png"
     },
