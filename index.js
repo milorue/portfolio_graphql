@@ -26,7 +26,7 @@ const projects = [
         image: "https://oceanwp.org/wp-content/uploads/2017/07/portfolio-image.png"
     },
     {
-        name: "PlowIt/PlowMe",
+        name: "PlowIt",
         description: "A snow plow cleared roads and route reporting application built during a 24hr HackBU Hackathon with 155 participants and $7,400 in prizes",
         used: ["React Native", "Node.js", "MongoDB", "GraphQL", "AWS EC2", "Trimble Maps Direction API", "Google Maps API (React Native Maps)", "Expo CLI", "Javascript"],
         links: ["https://expo.io/@mrue/plowit", "https://devpost.com/software/plowme-yj582z"],
