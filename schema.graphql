@@ -71,6 +71,7 @@ type Project {
     used: [String]
     links: [String]
     repos: [String]
+    videos: [String]
     note: String
     image: String
 }
