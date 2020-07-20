@@ -15,7 +15,8 @@
     "dotenv": "^8.2.0",
     "graphql": "^15.3.0",
     "graphql-tools": "^6.0.13",
-    "graphql-type-json": "^0.3.2"
+    "graphql-type-json": "^0.3.2",
+    "mongodb-stitch-server-sdk": "^4.8.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

@@ -8,6 +8,13 @@ type Query{
     jobs: [Job]
     projects: [Project]
     specificProjects(uses: [String]): [Project]
+    login(email: String!, password: String!): LoginToken
+    getUser(token: String!): User
+    validateToken(token: String!): Boolean
+}
+
+type Mutation{
+    createAccount(email: String!, password: String!, creationToken: String!) : Boolean
 }
 
 enum SkillType{
@@ -85,4 +92,17 @@ type Education {
     awards: [String]
     city: String
     state: String
+}
+
+type LoginToken {
+    token: String!
+    login: Boolean!
+    refreshToken: String!
+    user: User
+}
+
+type User {
+    userId: ID!
+    email: String!
+    admin: Boolean
 }
