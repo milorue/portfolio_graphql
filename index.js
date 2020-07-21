@@ -480,6 +480,11 @@ async function appInit(){
 
 
             },
+
+            async logout(parent, args){
+                let loggedOut = await app.userLogout(args.token)
+                return loggedOut
+            },
             async login(parent, args){
                 let loginToken = {
                     token: "",

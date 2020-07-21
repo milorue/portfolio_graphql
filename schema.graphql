@@ -10,7 +10,7 @@ type Query{
     specificProjects(uses: [String]): [Project]
     login(email: String!, password: String!): LoginToken
     getUser(token: String!): User
-    validateToken(token: String!): Boolean
+    logout(token: String!): Boolean
 }
 
 type Mutation{
