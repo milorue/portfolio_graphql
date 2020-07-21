@@ -19,11 +19,33 @@ class application{
         }
     }
 
-    async getUser(){
+    async getCurrUser(){
         if(this.client.auth.isLoggedIn){
             return new Promise(resolve => {
                 resolve(this.client.auth.user)
             })
+        }
+        else{
+            return new Promise(resolve => {
+                resolve(null)
+            })
+        }
+    }
+
+    async getUser(token){
+        if(this.client.auth.isLoggedIn){
+
+            if(token === this.client.auth.user.auth.activeUserAuthInfo.accessToken){
+                return new Promise(resolve => {
+                    resolve(this.client.auth.user)
+                })
+            }
+            else{
+                return new Promise(resolve => {
+                    resolve(null) // resolves to null if no active user
+                })
+            }
+            
         }
         else{
             return new Promise(resolve => {
@@ -32,9 +54,26 @@ class application{
         }
     }
 
-    async userLogout(){
-        // could do some fancy logic to check for checked in users but no need at the moment
-        this.client.auth.logout()
+    async userLogout(token){
+        if(this.client.auth.isLoggedIn){
+            if(token === this.client.auth.user.auth.activeUserAuthInfo.accessToken){
+                this.client.auth.logout()
+                return new Promise(resolve => {
+                    resolve(true)
+                })
+            }
+            else{
+                return new Promise(resolve => {
+                    resolve(false)
+                })
+            }
+            
+        }
+        else{
+            return new Promise(resolve => {
+                resolve(false)
+            })
+        }
     }
 
     async userLogin(email, password){

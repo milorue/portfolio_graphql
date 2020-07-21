@@ -492,10 +492,9 @@ async function appInit(){
                     
                 }
 
-
                 let accountLogin = await app.userLogin(args.email, args.password)
                 if(accountLogin){
-                    let user = await app.getUser()
+                    let user = await app.getCurrUser()
                     if(user !== null){
                         loginToken = {
                             token: user.auth.activeUserAuthInfo.accessToken,
@@ -515,6 +514,27 @@ async function appInit(){
                 else{
                     return loginToken
                 }
+            },
+            async getUser(parent, args){
+                let gotUser = {
+                    userId: "",
+                    email: "",
+                    admin: null,
+                }
+
+                let gotAccount = await app.getUser(args.token)
+                if(gotAccount !== null){
+                    gotUser = {
+                        userId: gotAccount.id,
+                        email: gotAccount.profile.data.email,
+                        admin: false
+                    }
+                    return gotUser
+                }
+                else{
+                    return gotUser
+                }
+
             }
         },
 
