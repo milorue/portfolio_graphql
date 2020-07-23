@@ -1,8 +1,11 @@
+require('dotenv').config()
 const {Stitch, AnonymousCredential, UserPasswordCredential, RemoteMongoClient, UserPasswordAuthProviderClient} = require('mongodb-stitch-server-sdk')
 
 class application{
     constructor(appId, database, service){
         this.appId = appId
+
+        this.defaultId = "5f19df7882df4a7979cd4305"
 
         // initializes the app client for interacting with atlas
         this.client = Stitch.initializeDefaultAppClient(this.appId)
@@ -57,7 +60,7 @@ class application{
     async userLogout(token){
         if(this.client.auth.isLoggedIn){
             if(token === this.client.auth.user.auth.activeUserAuthInfo.accessToken){
-                this.client.auth.logout()
+                this.client.auth.logoutUserWithId(this.client.auth.user.id)
                 return new Promise(resolve => {
                     resolve(true)
                 })
@@ -111,6 +114,162 @@ class application{
 
         return new Promise(resolve =>{
             resolve(success)
+        })
+    }
+
+    async addJob(token, job){
+        let user = await this.getUser(token)
+
+        if(user){
+            job.userId = user.id
+            const jobs = this.db.collection("jobs")
+            const createdJob = await jobs.insertOne(job)
+            .then(() => {
+                return new Promise(resolve => {
+                    resolve(true)
+                })
+            })
+            .catch((err) =>{
+                return new Promise(resolve => {
+                    resolve(false)
+                })
+            })
+            return new Promise(resolve => {
+                resolve(createdJob)
+            })
+        }
+        else{
+            return new Promise(resolve =>{
+                resolve(false)
+            })
+        }
+    }
+    async addSkill(token, skill){
+        let user = await this.getUser(token)
+
+        if(user){
+            skill.userId = user.id
+            const jobs = this.db.collection("skills")
+            const createdJob = await jobs.insertOne(skill)
+            .then(() => {
+                return new Promise(resolve => {
+                    resolve(true)
+                })
+            })
+            .catch((err) =>{
+                return new Promise(resolve => {
+                    resolve(false)
+                })
+            })
+            return new Promise(resolve => {
+                resolve(createdJob)
+            })
+        }
+        else{
+            return new Promise(resolve =>{
+                resolve(false)
+            })
+        }
+    }
+    async addProject(token, project){
+        let user = await this.getUser(token)
+
+        if(user !== null){
+            project.userId = user.id
+            const jobs = this.db.collection("projects")
+            const createdJob = await jobs.insertOne(project)
+            .then(() => {
+                return new Promise(resolve => {
+                    resolve(true)
+                })
+            })
+            .catch((err) =>{
+                console.log(err)
+                return new Promise(resolve => {
+                    resolve(false)
+                })
+            })
+            return new Promise(resolve => {
+                resolve(createdJob)
+            })
+        }
+        else{
+            return new Promise(resolve =>{
+                resolve(false)
+            })
+        }
+    }
+
+    async addData(token, data, collection){
+        let user = await this.getUser(token)
+
+        if(user){
+            data.userId = user.id
+            const jobs = this.db.collection(collection)
+            const createdJob = await jobs.insertOne(data)
+            .then(() => {
+                return new Promise(resolve => {
+                    resolve(true)
+                })
+            })
+            .catch((err) =>{
+                return new Promise(resolve => {
+                    resolve(false)
+                })
+            })
+            return new Promise(resolve => {
+                resolve(createdJob)
+            })
+        }
+        else{
+            return new Promise(resolve =>{
+                resolve(false)
+            })
+        }
+    }
+
+    async getArrayData(col){
+        const session = await this.userLogin(process.env.DATA_USER, process.env.DATA_PASSWORD)
+        const collection = this.db.collection(col)
+        const data = collection.find({userId: this.defaultId})
+        .asArray()
+        .then(docs =>{
+            return new Promise(resolve => {
+                resolve(docs)
+            })
+        })
+        .catch(err =>{
+            console.log(err)
+            return new Promise(resolve => {
+                resolve([])
+            })
+        })
+        const endSession = await this.getCurrUser()
+        await this.client.auth.logoutUserWithId(endSession.id)
+        return new Promise(resolve => {
+            resolve(data)
+        })
+    }
+
+    async getData(col){
+        const session = await this.userLogin(process.env.DATA_USER, process.env.DATA_PASSWORD)
+        const collection = this.db.collection(col)
+        const data = collection.find({userId: this.defaultId})
+        .then(docs =>{
+            return new Promise(resolve => {
+                resolve(docs)
+            })
+        })
+        .catch(err =>{
+            console.log(err)
+            return new Promise(resolve => {
+                resolve({})
+            })
+        })
+        const endSession = await this.getCurrUser()
+        await this.client.auth.logoutUserWithId(endSession.id)
+        return new Promise(resolve => {
+            resolve(data)
         })
     }
 }

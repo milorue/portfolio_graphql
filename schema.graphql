@@ -15,6 +15,7 @@ type Query{
 
 type Mutation{
     createAccount(email: String!, password: String!, creationToken: String!) : Boolean
+    addProject(token: String!, project: ProjectInput!): Boolean
 }
 
 enum SkillType{
@@ -56,6 +57,7 @@ type Date {
 }
 
 type Skill {
+    id: ID!
     name: String!
     type: String
     yearsofexperience: Int
@@ -73,6 +75,18 @@ type Links {
 }
 
 type Project {
+    id: ID!
+    name: String!
+    description: String
+    used: [String]
+    links: [String]
+    repos: [String]
+    videos: [String]
+    note: String
+    image: String
+}
+
+input ProjectInput {
     name: String!
     description: String
     used: [String]
