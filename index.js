@@ -137,7 +137,7 @@ async function appInit(){
 
     const jobs = [
         {
-            name: "Software Engineer I",
+            title: "Software Engineer I",
             company: "Prescient Edge",
             location: {
                 city: "Laurel",
@@ -164,7 +164,7 @@ async function appInit(){
             ]
         },
         {
-            name: "React-Native Mobile Developer",
+            title: "React-Native Mobile Developer",
             company: "Ithaca College",
             location: {
                 city: "Ithaca",
@@ -190,7 +190,7 @@ async function appInit(){
             ]
         },
         {
-            name: "Fullstack Mobile & Web Developer",
+            title: "Fullstack Mobile & Web Developer",
             company: "Contract/Freelance",
             location: {
                 city: "Annapolis",
