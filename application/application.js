@@ -117,6 +117,81 @@ class application{
         })
     }
 
+    async getArrayData(col){
+        const session = await this.userLogin(process.env.DATA_USER, process.env.DATA_PASSWORD)
+        const collection = this.db.collection(col)
+        const data = collection.find({userId: this.defaultId})
+        .asArray()
+        .then(docs =>{
+            return new Promise(resolve => {
+                resolve(docs)
+            })
+        })
+        .catch(err =>{
+            console.log(err)
+            return new Promise(resolve => {
+                resolve([])
+            })
+        })
+        const endSession = await this.getCurrUser()
+        await this.client.auth.logoutUserWithId(endSession.id)
+        return new Promise(resolve => {
+            resolve(data)
+        })
+    }
+
+    async getData(col){
+        const session = await this.userLogin(process.env.DATA_USER, process.env.DATA_PASSWORD)
+        const collection = this.db.collection(col)
+        const data = collection.find({userId: this.defaultId})
+        .then(docs =>{
+            return new Promise(resolve => {
+                resolve(docs)
+            })
+        })
+        .catch(err =>{
+            console.log(err)
+            return new Promise(resolve => {
+                resolve({})
+            })
+        })
+        const endSession = await this.getCurrUser()
+        await this.client.auth.logoutUserWithId(endSession.id)
+        return new Promise(resolve => {
+            resolve(data)
+        })
+    }
+
+    // mutator methods
+    async addProject(token, project){
+        let user = await this.getUser(token)
+
+        if(user !== null){
+            project.userId = user.id
+            const jobs = this.db.collection("projects")
+            const createdJob = await jobs.insertOne(project)
+            .then(() => {
+                return new Promise(resolve => {
+                    resolve(true)
+                })
+            })
+            .catch((err) =>{
+                console.log(err)
+                return new Promise(resolve => {
+                    resolve(false)
+                })
+            })
+            return new Promise(resolve => {
+                resolve(createdJob)
+            })
+        }
+        else{
+            return new Promise(resolve =>{
+                resolve(false)
+            })
+        }
+    }
+
     async addJob(token, job){
         let user = await this.getUser(token)
 
@@ -171,34 +246,6 @@ class application{
             })
         }
     }
-    async addProject(token, project){
-        let user = await this.getUser(token)
-
-        if(user !== null){
-            project.userId = user.id
-            const jobs = this.db.collection("projects")
-            const createdJob = await jobs.insertOne(project)
-            .then(() => {
-                return new Promise(resolve => {
-                    resolve(true)
-                })
-            })
-            .catch((err) =>{
-                console.log(err)
-                return new Promise(resolve => {
-                    resolve(false)
-                })
-            })
-            return new Promise(resolve => {
-                resolve(createdJob)
-            })
-        }
-        else{
-            return new Promise(resolve =>{
-                resolve(false)
-            })
-        }
-    }
 
     async addData(token, data, collection){
         let user = await this.getUser(token)
@@ -228,49 +275,32 @@ class application{
         }
     }
 
-    async getArrayData(col){
-        const session = await this.userLogin(process.env.DATA_USER, process.env.DATA_PASSWORD)
-        const collection = this.db.collection(col)
-        const data = collection.find({userId: this.defaultId})
-        .asArray()
-        .then(docs =>{
-            return new Promise(resolve => {
-                resolve(docs)
+    async updateData(token, data, id, collection){
+        let user = await this.getUser(token)
+        if(user){
+            const query = {"_id": id}
+            const update = { "$set": {
+                data
+            }}
+            const options = {"upsert": true}
+            const dataUpdater = this.db.collection(collection)
+            const dataUpdated = await dataUpdater.updateOne(query, update, options)
+            .then(() => {
+                return new Promise(resolve =>{
+                    resolve(true)
+                })
             })
-        })
-        .catch(err =>{
-            console.log(err)
-            return new Promise(resolve => {
-                resolve([])
+            .catch((err) => {
+                return new Promise(resolve => {
+                    resolve(false)
+                })
             })
-        })
-        const endSession = await this.getCurrUser()
-        await this.client.auth.logoutUserWithId(endSession.id)
-        return new Promise(resolve => {
-            resolve(data)
-        })
-    }
-
-    async getData(col){
-        const session = await this.userLogin(process.env.DATA_USER, process.env.DATA_PASSWORD)
-        const collection = this.db.collection(col)
-        const data = collection.find({userId: this.defaultId})
-        .then(docs =>{
-            return new Promise(resolve => {
-                resolve(docs)
+        }
+        else{
+            return new Promise(resolve =>{
+                resolve(false)
             })
-        })
-        .catch(err =>{
-            console.log(err)
-            return new Promise(resolve => {
-                resolve({})
-            })
-        })
-        const endSession = await this.getCurrUser()
-        await this.client.auth.logoutUserWithId(endSession.id)
-        return new Promise(resolve => {
-            resolve(data)
-        })
+        }
     }
 }
 

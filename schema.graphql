@@ -16,6 +16,7 @@ type Query{
 type Mutation{
     createAccount(email: String!, password: String!, creationToken: String!) : Boolean
     addProject(token: String!, project: ProjectInput!): Boolean
+    addJob(token: String!, skill: )
 }
 
 enum SkillType{
@@ -28,6 +29,8 @@ enum SkillType{
 }
 
 type Job {
+    _id: ID
+    userId: String
     title: String
     company: String
     location: Location
@@ -42,6 +45,8 @@ type Location {
 }
 
 type Person {
+    _id: ID
+    userId: String
     firstName: String!
     lastName: String!
     birthday: Date
@@ -57,7 +62,8 @@ type Date {
 }
 
 type Skill {
-    id: ID!
+    _id: ID
+    userId: String
     name: String!
     type: String
     yearsofexperience: Int
@@ -66,6 +72,8 @@ type Skill {
 }
 
 type Links {
+    _id: ID
+    userId: String
     github: String
     linkedin: String
     devpost: String
@@ -75,7 +83,8 @@ type Links {
 }
 
 type Project {
-    id: ID!
+    _id: ID
+    userId: String
     name: String!
     description: String
     used: [String]
@@ -87,17 +96,39 @@ type Project {
 }
 
 input ProjectInput {
+    userId: ID!
     name: String!
-    description: String
-    used: [String]
-    links: [String]
-    repos: [String]
-    videos: [String]
-    note: String
-    image: String
+    description: String!
+    used: [String]!
+    links: [String]!
+    repos: [String]!
+    videos: [String]!
+    note: String!
+    image: String!
+}
+
+input SkillInput {
+    userId: String!
+    name: String!
+    type: String!
+    yearsofexperience: Int!
+    tags: [String]!
+    note: String!
+}
+
+input JobInput {
+    userId: String!
+    title: String!
+    company: String!
+    location: Location!
+    startDate: Date!
+    endDate: Date!
+    responsibilities: [String]!
 }
 
 type Education {
+    _id: ID
+    userId: String
     collegename: String
     degree: String
     major: String

@@ -163,7 +163,7 @@ async function appInit(){
             async addProject(parent, args){
                 let addedProject = await app.addProject(args.token, args.project)
                 return addedProject
-            }
+            },
         }
     }
 
