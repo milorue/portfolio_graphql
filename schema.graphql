@@ -16,7 +16,6 @@ type Query{
 type Mutation{
     createAccount(email: String!, password: String!, creationToken: String!) : Boolean
     addProject(token: String!, project: ProjectInput!): Boolean
-    addJob(token: String!, skill: )
 }
 
 enum SkillType{
@@ -120,10 +119,22 @@ input JobInput {
     userId: String!
     title: String!
     company: String!
-    location: Location!
-    startDate: Date!
-    endDate: Date!
+    location: LocationInput!
+    startDate: DateInput!
+    endDate: DateInput!
     responsibilities: [String]!
+}
+
+input LocationInput {
+    city: String!
+    state: String!
+}
+
+input DateInput {
+    day: Int
+    month: Int
+    year: Int
+    dateString: String!
 }
 
 type Education {
